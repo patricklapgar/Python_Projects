@@ -16,3 +16,31 @@ class Tic_Tac_Toe:
 
     def available_moves(self):
         return [i for i, spot in enumerate(self.board) if spot == ' ']
+
+    def empty_squares(self):
+        return ' ' in self.board
+
+    def number_empty_squares(self):
+        return self.board.count(' ')
+
+    def make_move(self, square, letter):
+        if self.board[square] == ' ':
+            self.board[square] = letter
+            return True
+        return False
+
+def play(game, x_player, o_player, print_game=True):
+    if print_game:
+        game.print_board_numbers()
+
+    # Starting letter
+    starting_letter = 'X'
+    
+    # While the game has not been finished, iterate until there's a winner
+    while game.empty_squares():
+        if starting_letter == 'O':
+            square = o_player.get_move(game)
+        else:
+            square = x_player.get_move(game)
+
+        
