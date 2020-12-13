@@ -1,4 +1,4 @@
-from player import HumanPlayer, RandomComputerPlayer
+from player_AI import HumanPlayer, AIComputerPlayer, RandomComputerPlayer
 
 class Tic_Tac_Toe:
     def __init__(self):
@@ -90,7 +90,7 @@ def play(game, x_player, o_player, print_game=True):
 
 if __name__ == '__main__':
     print("Game Started")
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
+    x_player = RandomComputerPlayer('X')
+    o_player = AIComputerPlayer('O')
     tic_tac_toe = Tic_Tac_Toe()
     play(tic_tac_toe, x_player, o_player, print_game=True)

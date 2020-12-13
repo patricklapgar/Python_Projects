@@ -37,7 +37,7 @@ class HumanPlayer(Player):
         return value
 
 # Write a function for the AI
-def AIComputerPlayer(Player):
+class AIComputerPlayer(Player):
     def __init__(self, letter):
         super().__init__(letter)
 
@@ -48,7 +48,7 @@ def AIComputerPlayer(Player):
             square = random.choice(game.available_moves()) # 
         else:
             # Get the square based off the minimax algorithm
-            square = self.minimax(game, self.letter)
+            square = self.minimax(game, self.letter)['position']
 
         return square
     
@@ -82,4 +82,20 @@ def AIComputerPlayer(Player):
 
         for move in state.available_moves():
             # Make a move and attempt to take that spot
-            pass
+            state.make_move(move, player)
+            # Find a simulated score to see how will the move determine the player's score
+            simulated_score = self.minimax(state, other_player)
+            # Undo that simulated move
+            state.board[move] = ' '
+            state.current_winner = None
+            simulated_score['position'] = move
+
+            # Update dictionaries
+            if player == max_player:
+                if simulated_score['score'] > best['score']:
+                    best = simulated_score # Replace the best score for the human player
+                else:
+                    if simulated_score['score'] < best['score']:
+                        best = simulated_score # Replace the best score for the AI
+
+        return best
