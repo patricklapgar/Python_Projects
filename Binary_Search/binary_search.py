@@ -39,10 +39,10 @@ def binary_search(array, target, lower_index=None, higher_index=None):
 
 if __name__ == '__main__':
     # Implement both functions in main
-    l = [1, 3, 5, 10, 12]
-    target = 10
-    print(naive_approach(l, target))
-    print(binary_search(l, target))
+    #l = [1, 3, 5, 10, 12]
+    #target = 10
+    #print(naive_approach(l, target))
+    #print(binary_search(l, target))
 
     # Timing analysis of both algorithms
     length = 10000
@@ -52,3 +52,20 @@ if __name__ == '__main__':
         sorted_list.add(random.randint(-3*length, 3*length))
     
     sorted_list = sorted(list(sorted_list))
+
+    # Timing analysis for naive search
+    start_time = time.time()
+    for target in sorted_list:
+        naive_approach(sorted_list, target)
+    
+    end_time = time.time()
+    print("Naive search time: ", (end_time - start_time), " seconds")
+
+    # Timing analysis for binary search
+    start_time = time.time()
+    for target in sorted_list:
+        binary_search(sorted_list, target)
+    
+    end_time = time.time()
+    print("Binary search time: ", (end_time - start_time), " seconds")
+
