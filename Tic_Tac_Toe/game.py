@@ -1,3 +1,5 @@
+from player import HumanPlayer, RandomComputerPlayer
+
 class Tic_Tac_Toe:
     def __init__(self):
         self.board = [' ' for _ in range(9)] # Create the game board
@@ -83,11 +85,12 @@ def play(game, x_player, o_player, print_game=True):
                 return starting_letter
 
             starting_letter = 'O' if starting_letter == 'X' else 'X'
-            if starting_letter == 'X':
-                starting_letter = 'O'
-            else:
-                starting_letter = 'X'
-
-        if print_game:
+        else:
             print('It\'s a tie!')
-            
+
+if __name__ == '__main__':
+    print("Game Started")
+    x_player = HumanPlayer('X')
+    o_player = RandomComputerPlayer('O')
+    tic_tac_toe = Tic_Tac_Toe()
+    play(tic_tac_toe, x_player, o_player, print_game=True)

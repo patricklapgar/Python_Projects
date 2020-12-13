@@ -14,7 +14,7 @@ class RandomComputerPlayer(Player):
         super().__init__(letter)
 
     def get_move(self, game):
-        square = random.choice(game.available_moves)
+        square = random.choice(game.available_moves())
         return square
 
 class HumanPlayer(Player):
@@ -25,7 +25,7 @@ class HumanPlayer(Player):
         valid_square = False
         value = None
         while not valid_square:
-            square = input(self.letter + '\'s turn to make a move from (0-9): ')
+            square = input(self.letter + '\'s turn to make a move from (0-8): ')
             try:
                 value = int(square)
                 if value not in game.available_moves():
