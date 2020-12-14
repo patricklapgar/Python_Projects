@@ -62,7 +62,7 @@ class Board:
                     continue
 
                 if self.board[r][c] == '*':
-                    gnum_neighbor_bombs += 1
+                    num_neighbor_bombs += 1
 
         return num_neighbor_bombs
 
