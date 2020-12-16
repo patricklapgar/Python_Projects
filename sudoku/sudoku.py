@@ -3,7 +3,7 @@ def find_next_empty(puzzle):
     # Return row, column to represent space (returns None if there are no spaces available)
     for row in range(9):
         for col in range(9):
-            if puzzle[row][col] == -1:
+            if puzzle[row][col] == -1: # If that particular spot on the board is empty, return -1
                 return row, col
 
     return None, None 
@@ -48,4 +48,33 @@ def solve_sudoku(puzzle):
     for guess in range(1, 10):
         # Check if this guess is valid
         if is_valid(puzzle, guess, row, column): # Another helper function
-            pass
+            # If the guess is valid, place that guess on the puzzle
+            puzzle[row][column] = guess
+            # Recursively call this function
+            if solve_sudoku(puzzle): # If the sudoku puzzle is solved, return True
+                return True
+
+        # If the guess is invalid, or if doesn't solve the puzzle,
+        # then backtrack and try another guess
+        puzzle[row][column] = -1 # Reset the guess        
+
+    # If none of the guesses work in the puzzle, then the sudoku puzzle is unsolvable
+    return False
+
+if __name__ == '__main__':
+    board = [
+        [3, 9, -1,      -1, 5, -1,      -1, -1, -1],
+        [-1, -1, -1,     2, -1, -1,     -1, -1, 5],
+        [-1, -1, -1,     7, 1, 9,        -1, 8, -1],
+
+        [-1, 5, -1,       -1, 6, 8,      -1, -1, -1],
+        [2, -1, 6,        -1, -1, 3,     -1, -1, -1],
+        [-1, -1, -1,     -1, -1, -1,    -1, -1, 4],
+
+        [5, -1, -1,      -1, -1, -1,    -1, -1, -1],
+        [6, 7, -1,        1, -1, 5,      -1, 4, -1],
+        [1, -1, 9,        -1, -1, -1,    2, -1, -1]
+    ]
+
+    print(solve_sudoku(board))
+    print(board)
